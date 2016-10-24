@@ -1,0 +1,10 @@
+---
+name: orca
+
+dependencies:
+  - cmake
+  - xerces
+
+files:
+  - gporca/**/*
+  - gpos/**/*

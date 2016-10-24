@@ -1,0 +1,15 @@
+[submodule "src/gpdb"]
+	path = src/gpdb
+	url = https://github.com/greenplum-db/gpdb
+[submodule "src/python"]
+	path = src/python
+	url = https://github.com/python/cpython.git
+[submodule "src/gporca"]
+	path = src/gporca
+	url = https://github.com/greenplum-db/gporca
+[submodule "src/gpos"]
+	path = src/gpos
+	url = https://github.com/greenplum-db/gpos
+[submodule "src/gp-xerces"]
+	path = src/gp-xerces
+	url = https://github.com/greenplum-db/gp-xerces

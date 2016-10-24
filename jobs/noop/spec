@@ -1,0 +1,7 @@
+---
+name: noop
+templates:
+  run.bash: bin/run
+
+packages:
+  - gpdb

@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e -u -o pipefail
+set -o posix
+
+_main() {
+	gp-xerces/configure --prefix "${BOSH_INSTALL_TARGET}"
+	make -j"$(nproc)" install
+}
+
+_main "$@"

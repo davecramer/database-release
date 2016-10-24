@@ -1,0 +1,7 @@
+---
+name: xerces
+
+dependencies:
+
+files:
+  - gp-xerces/**/*

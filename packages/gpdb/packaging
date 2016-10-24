@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e -u -o pipefail
+set -o posix
+
+_main() {
+	pushd gpdb
+	PATH=/var/vcap/packages/python/bin:"${PATH}"
+	local colon_delimited_includes
+	local colon_delimited_libs
+	colon_delimited_includes=$(prefixes include xerces orca)
+	colon_delimited_libs=$(prefixes lib xerces orca)
+	./configure --prefix "${BOSH_INSTALL_TARGET}" \
+		--disable-gpfdist \
+		--enable-orca \
+		--with-libraries="${colon_delimited_libs}" --with-includes="${colon_delimited_includes}"
+	make -j"$(nproc)" install
+	popd
+}
+
+prefixes() {
+	local suffix
+	suffix=$1
+	shift
+	local prefixes
+	prefixes=( $( printf "/var/vcap/packages/%s/${suffix}\n" "$@" ) )
+	(
+	IFS=:
+	echo "${prefixes[*]}"
+	)
+}
+
+_main "$@"

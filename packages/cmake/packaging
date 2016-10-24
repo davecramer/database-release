@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e -u -o pipefail
+set -o posix
+
+_main() {
+	tar xzf cmake/cmake-linux-amd64.tar.gz --strip-components 1 -C "${BOSH_INSTALL_TARGET}"
+}
+
+_main "$@"
