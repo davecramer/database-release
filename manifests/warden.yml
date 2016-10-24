@@ -1,0 +1,22 @@
+vm_types:
+  - name: small
+  - name: medium
+
+networks:
+  - name: internal
+    type: manual
+    subnets:
+      - az: z1
+        range: 10.244.0.0/24
+        reserved:
+          - 10.244.0.1
+
+azs:
+  - name: z1
+
+compilation:
+  workers: 4
+  az: z1
+  vm_type: small
+  network: internal
+  reuse_compilation_vms: true
