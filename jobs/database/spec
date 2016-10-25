@@ -1,0 +1,9 @@
+---
+name: database
+templates:
+  database_ctl.bash: bin/database_ctl
+
+packages:
+  - gpdb
+  - xerces
+  - orca

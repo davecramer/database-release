@@ -1,0 +1,17 @@
+check process master
+  with pidfile /var/vcap/sys/run/database/master.pid
+  start program "/var/vcap/jobs/database/bin/database_ctl master start" timeout 60 seconds
+  stop program "/var/vcap/jobs/database/bin/database_ctl master stop"
+  group vcap
+
+check process seg0
+  with pidfile /var/vcap/sys/run/database/seg0.pid
+  start program "/var/vcap/jobs/database/bin/database_ctl segment 0 start" timeout 60 seconds
+  stop program "/var/vcap/jobs/database/bin/database_ctl segment 0 stop"
+  group vcap
+
+check process seg1
+  with pidfile /var/vcap/sys/run/database/seg1.pid
+  start program "/var/vcap/jobs/database/bin/database_ctl segment 1 start" timeout 60 seconds
+  stop program "/var/vcap/jobs/database/bin/database_ctl segment 1 stop"
+  group vcap

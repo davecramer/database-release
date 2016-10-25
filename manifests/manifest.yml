@@ -3,6 +3,8 @@ name: gpdb-solo
 releases:
   - name: database
     version: latest
+  - name: os-conf
+    version: "7"
 
 stemcells:
   - alias: default
@@ -10,18 +12,24 @@ stemcells:
     version: latest
 
 instance_groups:
-  - name: db
+  - name: database
     instances: 1
-    lifecycle: errand
     vm_type: small
     networks:
       - name: internal
     jobs:
-      - name: noop
+      - name: database
         release: database
+      - name: user_add
+        release: os-conf
+        properties:
+          users:
+            - name: gpadmin
+              crypted_password: '$6$5obyvKpYkFAB$VPy8yxRicDGVePVodRLmPzznO9ZbsJqy5A8OeTWfWdy8BcyHeLe5T/SRAZArvtcKCn1AohJUF9owqV1zn./ZB1'
     azs:
       - z1
     stemcell: default
+    persistent_disk: 10_240
 
 update:
   canaries: 1
@@ -29,4 +37,5 @@ update:
   canary_watch_time: 3000-27000
   update_watch_time: 3000-27000
 
-director_uuid: 2db63f0d-b544-456a-b923-86c1e689fcc9
+# director_uuid: 2db63f0d-b544-456a-b923-86c1e689fcc9 # docker
+director_uuid: 93c01d2d-a2a5-49d8-8d02-389fd223a9cf # virtualbox
