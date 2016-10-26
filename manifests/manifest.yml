@@ -31,11 +31,24 @@ instance_groups:
     stemcell: default
     persistent_disk: 10_240
 
+  - name: etl
+    instances: 1
+    lifecycle: errand
+    networks:
+      - name: internal
+    jobs:
+      - name: etl
+        release: database
+    vm_type: small
+    azs:
+      - z1
+    stemcell: default
+
 update:
   canaries: 1
   max_in_flight: 4
-  canary_watch_time: 3000-27000
-  update_watch_time: 3000-27000
+  canary_watch_time: 3000-60000
+  update_watch_time: 3000-60000
 
 # director_uuid: 2db63f0d-b544-456a-b923-86c1e689fcc9 # docker
 director_uuid: 93c01d2d-a2a5-49d8-8d02-389fd223a9cf # virtualbox

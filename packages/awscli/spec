@@ -1,0 +1,8 @@
+---
+name: awscli
+
+dependencies:
+  - python
+
+files:
+  - awscli/*

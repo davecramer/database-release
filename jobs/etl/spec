@@ -1,0 +1,19 @@
+---
+name: etl
+templates:
+  run.bash: bin/run
+
+consumes:
+  - name: database
+    type: master
+
+packages:
+  - python
+  - awscli
+  - gpdb
+
+properties:
+  aws_access_key_id:
+    description: AWS Acess key ID
+  aws_secret_access_key:
+    description: AWS Secret access key

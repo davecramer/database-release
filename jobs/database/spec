@@ -3,7 +3,14 @@ name: database
 templates:
   database_ctl.bash: bin/database_ctl
 
+# FIXME: once we want to do multi node, we'll need to split this job
+provides:
+  - name: db
+    type: master
+
 packages:
   - gpdb
   - xerces
   - orca
+
+properties: {}
