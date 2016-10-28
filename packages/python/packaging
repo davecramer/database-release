@@ -3,10 +3,13 @@ set -e -u -o pipefail
 set -o posix
 
 _main() {
-	pushd python
-	./configure --prefix "${BOSH_INSTALL_TARGET}"
+	mkdir python_src build
+	tar xJf python/python.tar.xz --strip-components 1 -C python_src
+	(
+	cd build
+	../python_src/configure --prefix "${BOSH_INSTALL_TARGET}"
 	make -j"$(nproc)" install
-	popd
+	)
 }
 
 _main "$@"

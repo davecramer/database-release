@@ -4,4 +4,4 @@ name: python
 dependencies:
 
 files:
-  - python/**/*
+  - python/python.tar.xz

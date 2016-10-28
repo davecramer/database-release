@@ -3,3 +3,7 @@ cmake/cmake-linux-amd64.tar.gz:
   object_id: b8042702-e374-471b-8d0c-3a1d3cf64aa0
   sha: dd9d8d57b66109d4bac6eef9209beb94608a185c
   size: 28542680
+python/python.tar.xz:
+  object_id: fd4cb982-ca18-4643-88ac-2990334c4dd6
+  sha: 05360b8ade117b35e266b2004a7f1f11250c6dcd
+  size: 12390820
