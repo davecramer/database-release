@@ -1,4 +1,4 @@
-name: gpdb-solo
+name: gpdb_local
 
 releases:
   - name: database
@@ -10,23 +10,37 @@ stemcells:
     version: latest
 
 instance_groups:
-  - name: db
+  - name: master
     instances: 1
-    lifecycle: errand
+    persistent_disk: 2_048
     vm_type: small
-    networks:
-      - name: internal
     jobs:
-      - name: noop
+      - name: master
         release: database
     azs:
       - z1
+    networks:
+      - name: internal
+    stemcell: default
+
+  - name: segment
+    instances: 1
+    persistent_disk: 8_192
+    vm_type: medium
+    jobs:
+      - name: segment
+        release: database
+    azs:
+      - z1
+    networks:
+      - name: internal
     stemcell: default
 
 update:
   canaries: 1
   max_in_flight: 4
-  canary_watch_time: 3000-27000
-  update_watch_time: 3000-27000
+  canary_watch_time: 3000-90000
+  update_watch_time: 3000-90000
+  serial: false
 
 director_uuid: 2db63f0d-b544-456a-b923-86c1e689fcc9
