@@ -36,7 +36,7 @@ _main() {
 
 	case "${action}" in
 		start)
-			start "${DATA_DIR}" "${JOB_DIR}"
+			start_segment "${DATA_DIR}" "${JOB_DIR}"
 			;;
 		stop)
 			stop "${DATA_DIR}" "${PID_FILE}"

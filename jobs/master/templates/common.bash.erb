@@ -1,4 +1,17 @@
-start() {
+start_master() {
+	echo "Starting database"
+	local DATA_DIR
+	local JOB_DIR
+
+	DATA_DIR=$1
+	JOB_DIR=$2
+
+	init_master "${DATA_DIR}" "${JOB_DIR}"
+
+	exec postgres -D "${DATA_DIR}"
+}
+
+start_segment() {
 	echo "Starting database"
 	local DATA_DIR
 	local JOB_DIR
@@ -11,7 +24,7 @@ start() {
 	exec postgres -D "${DATA_DIR}"
 }
 
-init_db() {
+init_master() {
 	local DATA_DIR
 	local JOB_DIR
 
@@ -44,6 +57,21 @@ INSERT INTO gp_segment_configuration VALUES (<%= dbid %>, <%= contentid %>, 'p',
 INSERT INTO pg_filespace_entry VALUES (${PG_SYSTEM_OID}, <%= dbid %>, '/var/vcap/store/segment/0.1');
 <% end %>
 EOF
+	fi
+}
+
+init_db() {
+	local DATA_DIR
+	local JOB_DIR
+
+	DATA_DIR=$1
+	JOB_DIR=$2
+
+	if [[ -f "${DATA_DIR}"/postgresql.conf ]]; then
+		copy_config "${DATA_DIR}" "${JOB_DIR}"
+	else
+		initdb -D "${DATA_DIR}"
+		copy_config "${DATA_DIR}" "${JOB_DIR}"
 	fi
 }
 
